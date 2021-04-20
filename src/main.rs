@@ -2,8 +2,9 @@ extern crate structopt;
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
+#[structopt(name = "Catsay", about = "cli app with a talking cat")]
 struct Options {
-    #[structopt(default_value = "Meow!")]
+    #[structopt(name = "message", help = "pass a message", default_value = "Meow!")]
     /// What does the cat say?
     message: String,
 }
