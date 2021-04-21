@@ -1,0 +1,4 @@
+   Compiling catsay v0.1.0 (/Users/roeldejong/Development/catsay)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.86s
+     Running `target/debug/catsay woof`
+Cat doesn't want to bark like a dog
