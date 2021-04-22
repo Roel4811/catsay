@@ -6,6 +6,7 @@ use colored::*;
 
 use failure::ResultExt;
 use exitfailure::ExitFailure;
+use std::io::{self, Read};
 
 #[derive(StructOpt)]
 #[structopt(name = "Catsay", about = "cli app with a talking cat")]
@@ -21,11 +22,22 @@ struct Options {
     #[structopt(short = "f", long = "file", parse(from_os_str))]
     /// Load the cat picture from the specified file
     catfile: Option<std::path::PathBuf>,
+
+    #[structopt(short = "i", long = "stdin")]
+    /// Read the message from STDIN instead of the argument
+    stdin: bool,
 }
 
 fn main() -> Result<(), ExitFailure> {
     let options = Options::from_args();
-    let message = options.message;
+    let mut message = String::new();
+
+    if options.stdin {
+        io::stdin().read_to_string(&mut message)?;
+    } else {
+        message = options.message;
+    }
+
     if message.to_lowercase() == "woof" {
         eprintln!("Cat doesn't want to bark like a dog")
     }
